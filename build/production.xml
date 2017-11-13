@@ -22,8 +22,7 @@
                 <include name="**" />
             </fileset>
         </copy>
-		<chmod file="${target.dir}/storage" mode="0777" />
-		<chmod file="${target.dir}/storage/logs" mode="0777" />
+		<exec command="chown -R www-data:www-data ${target.dir}" escape="false" checkreturn="true"/>
     </target>
 
     <target name="composer">
