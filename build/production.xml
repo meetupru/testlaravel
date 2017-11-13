@@ -11,7 +11,7 @@
         <echo msg="Current date and time: ${build.time}" />
         <resolvepath propertyName="project.dir" file="${project.basedir}" />
         <echo msg="Source folder: ${project.dir}" />
-        <resolvepath propertyName="target.dir" file="/home/laravel/web/ihomehands.ru/master/${build.time}" />
+        <resolvepath propertyName="target.dir" file="/home/laravel/web/laravel.ihomehands.ru/master/${build.time}" />
         <echo msg="Target folder: ${target.dir}" />
     </target>
 
@@ -29,7 +29,7 @@
     </target>
 
     <target name="symlink">
-        <symlink link="/home/laravel/web/ihomehands.ru/public_html" target="${target.dir}" overwrite="true" />
+        <symlink link="/home/laravel/web/laravel.ihomehands.ru/public_html" target="${target.dir}" overwrite="true" />
     </target>
 
 </project>
