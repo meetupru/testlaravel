@@ -22,6 +22,7 @@
                 <include name="**" />
             </fileset>
         </copy>
+		<chmod file="${target.dir}/storage" mode="0777" />
     </target>
 
     <target name="composer">
