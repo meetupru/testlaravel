@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="TEST" basedir="." default="build">
+
+    <target name="build" depends="vars, copy, composer, symlink" />
+
+    <target name="vars">
+        <php returnProperty="build.time" function="date">
+            <param value="Y-m-d-H-i-s" />
+        </php>
+        <echo msg="Current date and time: ${build.time}" />
+        <resolvepath propertyName="project.dir" file="${project.basedir}" />
+        <echo msg="Source folder: ${project.dir}" />
+        <resolvepath propertyName="target.dir" file="/home/laravel/web/ihomehands.ru/master/${build.time}" />
+        <echo msg="Target folder: ${target.dir}" />
+    </target>
+
+    <target name="copy">
+        <mkdir dir="${target.dir}" mode="0777" />
+        <copy todir="${target.dir}">
+            <fileset dir="${project.dir}">
+                <include name="**" />
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="composer">
+        <exec command="/usr/local/bin/composer install" dir="${target.dir}" passthru="true" checkreturn="true"/>
+    </target>
+
+    <target name="symlink">
+        <symlink link="/home/laravel/web/ihomehands.ru/public_html" target="${target.dir}" overwrite="true" />
+    </target>
+
+</project>
