@@ -23,6 +23,7 @@
             </fileset>
         </copy>
 		<chmod file="${target.dir}/storage" mode="0777" />
+		<chmod file="${target.dir}/storage/log" mode="0777" />
     </target>
 
     <target name="composer">
