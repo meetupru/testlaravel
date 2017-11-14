@@ -2,7 +2,7 @@
 
 <project name="TEST" basedir="." default="build">
 
-    <target name="build" depends="vars, copy, config, composer, symlink" />
+    <target name="build" depends="vars, copy, config, composer, migrate, symlink" />
 
     <target name="vars">
         <php returnProperty="build.time" function="date">
