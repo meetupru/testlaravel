@@ -43,7 +43,7 @@
     </target>
 
 	<target name="migrate">
-        <exec command="php ${project.dir}/artisan migrate" dir="${project.dir}" passthru="true" checkreturn="true" />	
+        <exec command="php ${target.dir}/artisan migrate" dir="${project.dir}" passthru="true" checkreturn="true" />	
 	 </target>
 	
     <target name="symlink">
