@@ -2,7 +2,7 @@
 
 <project name="TEST" basedir="." default="build">
 
-    <target name="build" depends="vars, copy, composer, symlink" />
+    <target name="build" depends="vars, copy, config, composer, symlink" />
 
     <target name="vars">
         <php returnProperty="build.time" function="date">
@@ -23,15 +23,29 @@
 				<exclude name="build/**"/>
             </fileset>
         </copy>
-		<copy file="${project.dir}/build/.env.build" tofile="${target.dir}/.env" overwrite="true"/>
-		<exec command="chown -R www-data:www-data ${target.dir}" escape="false" checkreturn="true"/>
-		<exec command="chmod -R 777 ${target.dir}" escape="false" checkreturn="true"/>		
+		<exec command="chmod -R 777 ${target.dir}/storage" escape="false" checkreturn="true"/>		
     </target>
-
+	
+    <target name="config">
+		<copy file="${project.dir}/build/.env.build" tofile="${target.dir}/.env" overwrite="true">	
+		  <filterchain>
+			  <replacetokens begintoken="{{" endtoken="}}">
+			     <token key="db.name" value="${db.name}">
+			     <token key="db.user" value="${db.user}">
+			     <token key="db.pass" value="${db.pass}">				 
+			  </replacetokens>
+		  </filterchain>
+		</copy>
+    </target>	
+	
     <target name="composer">
         <exec command="/usr/local/bin/composer install" dir="${target.dir}" passthru="true" checkreturn="true"/>
     </target>
 
+	<target name="migrate">
+        <exec command="php ${project.dir}/artisan migrate" dir="${project.dir}" checkreturn="true" outputProperty="migration.output" />	
+	 </target>
+	
     <target name="symlink">
         <symlink link="/home/laravel/web/laravel.ihomehands.ru/public_html" target="${target.dir}" overwrite="true" />
     </target>
