@@ -20,8 +20,10 @@
         <copy todir="${target.dir}">
             <fileset dir="${project.dir}">
                 <include name="**" />
+				<exclude name="build/**"/>
             </fileset>
         </copy>
+		<copy file="${project.dir}/build/.env.build" tofile="${target.dir}/.env" overwrite="true"/>
 		<exec command="chown -R www-data:www-data ${target.dir}" escape="false" checkreturn="true"/>
 		<exec command="chmod -R 777 ${target.dir}" escape="false" checkreturn="true"/>		
     </target>
