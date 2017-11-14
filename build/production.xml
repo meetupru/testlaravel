@@ -30,9 +30,9 @@
 		<copy file="${project.dir}/build/.env.build" tofile="${target.dir}/.env" overwrite="true">	
 		  <filterchain>
 			  <replacetokens begintoken="{{" endtoken="}}">
-			     <token key="db.name" value="${db.name}">
-			     <token key="db.user" value="${db.user}">
-			     <token key="db.pass" value="${db.pass}">				 
+			     <token key="db.name" value="${db.name}"/>
+			     <token key="db.user" value="${db.user}"/>
+			     <token key="db.pass" value="${db.pass}"/>				 
 			  </replacetokens>
 		  </filterchain>
 		</copy>
